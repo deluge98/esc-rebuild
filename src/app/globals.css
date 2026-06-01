@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+:root {
+  --esc-red: #e31837;
+  --esc-red-dark: #c41230;
+  --esc-black: #1a1a1a;
+  --esc-gray: #f5f5f5;
+  --background: #ffffff;
+  --foreground: #1a1a1a;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-esc-red: var(--esc-red);
+  --color-esc-red-dark: var(--esc-red-dark);
+  --color-esc-black: var(--esc-black);
+  --color-esc-gray: var(--esc-gray);
+  --font-sans: var(--font-geist-sans);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
