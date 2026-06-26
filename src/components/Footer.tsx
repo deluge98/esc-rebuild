@@ -1,3 +1,11 @@
+import {
+  CLUB_ADDRESS,
+  CLUB_EMAIL,
+  CLUB_MAPS_URL,
+  CLUB_PHONE,
+  CLUB_PHONE_TEL,
+} from "@/lib/constants";
+
 export default function Footer() {
   return (
     <footer className="bg-esc-black text-white">
@@ -5,20 +13,26 @@ export default function Footer() {
         <div>
           <h2 className="text-lg font-bold uppercase tracking-wide">Contact</h2>
           <address className="mt-4 space-y-2 not-italic text-white/80">
-            <p>15330 111 Ave NW, Edmonton, AB T5M 4C8</p>
+            <p>
+              <a
+                href={CLUB_MAPS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white"
+              >
+                {CLUB_ADDRESS}
+              </a>
+            </p>
             <p>
               Phone:{" "}
-              <a href="tel:+17803062395" className="hover:text-white">
-                (780) 306-2395
+              <a href={`tel:${CLUB_PHONE_TEL}`} className="hover:text-white">
+                {CLUB_PHONE}
               </a>
             </p>
             <p>
               Email:{" "}
-              <a
-                href="mailto:info@edmontonsquashclub.ca"
-                className="hover:text-white"
-              >
-                info@edmontonsquashclub.ca
+              <a href={`mailto:${CLUB_EMAIL}`} className="hover:text-white">
+                {CLUB_EMAIL}
               </a>
             </p>
           </address>
@@ -44,7 +58,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-white/10 py-6 text-center text-sm text-white/50">
-        © Edmonton Squash Club 2015–2026
+        © Edmonton Squash Club 2015–{new Date().getFullYear()}
       </div>
     </footer>
   );

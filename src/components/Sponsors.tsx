@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { goldSponsors } from "@/data/sponsors";
+import { goldSponsors, sponsorLinkLabel } from "@/data/sponsors";
 
 const cardClassName =
   "flex items-center justify-center rounded-lg border border-gray-100 bg-white p-4 transition-shadow hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-esc-red";
@@ -44,7 +44,7 @@ export default function Sponsors() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className={cardClassName}
-                  aria-label={`Visit ${sponsor.name} website`}
+                  aria-label={sponsorLinkLabel(sponsor)}
                 >
                   <SponsorLogo {...sponsor} />
                 </a>

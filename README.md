@@ -18,7 +18,9 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Current status
 
-**Phase 0** — demo homepage (hero, features, sponsors, footer). Nav and most CTAs are visual-only until Phase 1.
+**Phase 0** — demo homepage with local images, working login/booking links, and skip navigation. Additional nav pages coming in Phase 1.
+
+Re-download images: `bash scripts/download-images.sh`
 
 ## Stack
 

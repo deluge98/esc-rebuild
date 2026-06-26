@@ -17,7 +17,7 @@ export default function IntroSection() {
 
         <div className="relative aspect-[4/3] overflow-hidden rounded-lg shadow-lg">
           <Image
-            src="https://edmontonsquashclub.ca/wp-content/uploads/2019/02/canadian-nat-womens-tournament-1200px16.jpg"
+            src="/images/intro.jpg"
             alt="Women playing squash at Edmonton Squash Club"
             fill
             className="object-cover"

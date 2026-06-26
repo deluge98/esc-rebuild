@@ -1,10 +1,11 @@
 import Image from "next/image";
+import { MEMBERSHIP_INFO_URL } from "@/lib/constants";
 
 export default function Hero() {
   return (
     <section className="relative min-h-[320px] overflow-hidden sm:min-h-[480px]">
       <Image
-        src="https://edmontonsquashclub.ca/wp-content/uploads/2017/12/GaultiervsGawad-header.jpg"
+        src="/images/hero.jpg"
         alt="Squash match action at Edmonton Squash Club"
         fill
         priority
@@ -20,9 +21,12 @@ export default function Hero() {
         <p className="mt-3 max-w-xl text-base text-white/90 sm:mt-4 sm:text-xl">
           Growing the Edmonton squash community
         </p>
-        <span className="mt-6 inline-block rounded-full bg-esc-red px-6 py-2.5 text-sm font-semibold text-white shadow-lg sm:mt-8 sm:px-8 sm:py-3 sm:text-base">
+        <a
+          href={MEMBERSHIP_INFO_URL}
+          className="mt-6 inline-block rounded-full bg-esc-red px-6 py-2.5 text-sm font-semibold text-white shadow-lg transition-colors hover:bg-esc-red-dark sm:mt-8 sm:px-8 sm:py-3 sm:text-base"
+        >
           Get Started: Create Your Free Account
-        </span>
+        </a>
       </div>
     </section>
   );
