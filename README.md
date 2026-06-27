@@ -4,8 +4,7 @@ Mobile-first Next.js rebuild of [edmontonsquashclub.ca](https://edmontonsquashcl
 
 ## Docs
 
-- **[docs/plan.md](./docs/plan.md)** — rebuild plan (phases, SEO, scope)
-- **[docs/stakeholder-questions.md](./docs/stakeholder-questions.md)** — questions for club members before full migration
+- **[docs/plan.md](./docs/plan.md)** — rebuild plan (phases, launch criteria, decisions)
 
 ## Run locally
 
@@ -18,7 +17,7 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Current status
 
-**Phase 0** — demo homepage with local images, working login/booking links, and skip navigation. Additional nav pages coming in Phase 1.
+**Phase 1** — full site clone in progress. Preview: [esc-rebuild.vercel.app](https://esc-rebuild.vercel.app/)
 
 Re-download images: `bash scripts/download-images.sh`
 
