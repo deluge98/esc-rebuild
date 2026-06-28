@@ -1,0 +1,9 @@
+{
+  "slug": "court-booking-calendar",
+  "title": "Court Booking Calendar",
+  "excerpt": "Current Court Booking Calendar For privacy reasons, the booking interface with names is only available to members. Sometimes it&#8217;s nice to get an idea if there&#8217;s a court free on short notice, or for new members to get a sense of whether they&#8217;ll be able to get a court at their preferred time a week &#8230; Read more",
+  "content": "<h1>\n\t\tCurrent Court Booking Calendar\n\t</h1>\n\t<p>For privacy reasons, the booking interface with names is only available to members. Sometimes it&#8217;s nice to get an idea if there&#8217;s a court free on short notice, or for new members to get a sense of whether they&#8217;ll be able to get a court at their preferred time a week ahead of time, so here&#8217;s an anonymized view of the court bookings.</p>\n<p>Please note that this is not a booking interface. If you are a non-member and want to book a court, then please try to contact the front desk at info@edmontonsquashclub.ca or 780-306-2395.</p>\n\t<iframe src=\"https://ts2.clubinterconnect.com/edmonton/home/calendarDayBlankView.do?id=59\"></iframe>\n",
+  "modified": "2019-04-18T15:46:40",
+  "yoastTitle": null,
+  "yoastDescription": null
+}

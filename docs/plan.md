@@ -51,16 +51,32 @@ Clone [edmontonsquashclub.ca](https://edmontonsquashclub.ca/) as a mobile-first 
 
 **Goal:** Clone all public pages onto the Vercel preview URL for club approval before DNS cutover.
 
-- [ ] Wire nav to real routes (Memberships, About, Programs + subpages)
-- [ ] Scrape all public WP pages → MDX (`scripts/migrate-wp-content.ts`)
-- [ ] Skip WP drafts and unpublished pages only
-- [ ] Image optimization (`next/image`)
-- [ ] Per-page metadata from WP; match existing URL slugs
+- [x] Wire nav to real routes (Memberships, About, Programs + subpages)
+- [x] Scrape all public WP pages → JSON (`scripts/migrate-wp-content.mjs`, `npm run migrate-content`)
+- [x] Skip WP drafts and unpublished pages only
+- [x] Image optimization (`next/image`) — homepage + sponsor logos; WP images via remote patterns
+- [x] Per-page metadata from WP; match existing URL slugs
 - [ ] Club reviews and approves at [esc-rebuild.vercel.app](https://esc-rebuild.vercel.app/)
+- [ ] **Ask with the approval request:** who can edit DNS for `edmontonsquashclub.ca`? (registrar, WordPress host, Cloudflare, etc. — we need edit access, not a domain transfer.) Launch = they approve the preview, then that person points the site records to Vercel. Leave MX (email) records unchanged unless we intentionally migrate mail.
+
+#### Beaver Builder & content gaps
+
+The WP REST API exports text, not Beaver Builder / Ultimate Addons layout (pricing tables, tabs, accordions, etc.). Pages like these need custom components or manual fixes before club approval.
+
+- [x] `/membership-info/` — pricing comparison table (`MembershipPricingTable`)
+- [x] `/court-booking-calendar/` — anonymized ClubInterconnect embed
+- [x] `/sponsors/` — sponsor grid + sponsorship CTA
+- [x] `/blog/` — post listing (WP page body was empty)
+- [ ] `/programs/` — rebuild tabs + accordions (BB layout does not migrate; page is currently a broken wall of HTML)
+- [ ] Individual membership pages (`/premium-membership/`, `/junior-membership/`, `/off-peak-membership/`, `/doubles-fitness-membership/`, `/basic-membership/`) — spot-check prose, photos, and Sign Up CTAs
+- [ ] `/yoga/` — Gravity Form will not submit after cutover; content is stale (2017) — replace form or link to external flow
+- [ ] `/subscribe-to-newsletter/` — fix broken demo assets; wire real newsletter signup
+- [ ] `/events/` — empty placeholder on live site too — decide keep, remove, or rebuild
+- [ ] Spot-check iframe embed pages (e.g. `/doubles-squash/`, sponsor CPT pages)
 
 ### Phase 2 — Launch
 
-**Cutover** = point `edmontonsquashclub.ca` DNS from the WordPress host to Vercel.
+**Cutover** = after club approval, whoever manages DNS points `edmontonsquashclub.ca` from the WordPress host to Vercel.
 
 - [ ] Export all live WP URLs; confirm new site matches paths (or document exceptions)
 - [ ] Redirect map → `next.config.ts` + `docs/redirects.md` (only for changed/removed paths)

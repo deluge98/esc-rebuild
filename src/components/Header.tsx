@@ -1,18 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import MainNav from "@/components/MainNav";
 import {
   CATCH_CORNER_BOOKING_URL,
   CLUB_PHONE,
   CLUB_PHONE_TEL,
   COURT_RESERVE_LOGIN_URL,
 } from "@/lib/constants";
-
-const navItems = [
-  { label: "Home", href: "/" as const, current: true },
-  { label: "Memberships", href: null },
-  { label: "About", href: null },
-  { label: "Programs", href: null },
-];
 
 function CtaLink({
   href,
@@ -105,36 +99,7 @@ export default function Header() {
         </div>
       </div>
 
-      <nav
-        aria-label="Main navigation"
-        className="border-t-2 border-esc-red bg-esc-black"
-      >
-        <ul className="mx-auto flex max-w-6xl items-center justify-center px-1 sm:px-4">
-          {navItems.map((item) => (
-            <li key={item.label} className="shrink-0">
-              {item.href ? (
-                <Link
-                  href={item.href}
-                  aria-current={item.current ? "page" : undefined}
-                  className={`block px-3 py-2 text-[11px] font-medium uppercase tracking-wide text-white sm:px-5 sm:py-2.5 sm:text-sm ${
-                    item.current ? "bg-white/15" : "hover:bg-white/10"
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              ) : (
-                <span
-                  className="block cursor-not-allowed px-3 py-2 text-[11px] font-medium uppercase tracking-wide text-white/50 sm:px-5 sm:py-2.5 sm:text-sm"
-                  aria-disabled="true"
-                  title="Coming soon on the new site"
-                >
-                  {item.label}
-                </span>
-              )}
-            </li>
-          ))}
-        </ul>
-      </nav>
+      <MainNav />
     </header>
   );
 }

@@ -17,7 +17,9 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Current status
 
-**Phase 1** — full site clone in progress. Preview: [esc-rebuild.vercel.app](https://esc-rebuild.vercel.app/)
+**Phase 1** — full site clone on preview. 30 pages + 202 blog posts migrated. Preview: [esc-rebuild.vercel.app](https://esc-rebuild.vercel.app/)
+
+Refresh content from WordPress: `npm run migrate-content`
 
 Re-download images: `bash scripts/download-images.sh`
 

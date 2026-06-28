@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { MEMBERSHIP_INFO_URL } from "@/lib/constants";
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -21,12 +21,12 @@ export default function Hero() {
         <p className="mt-3 max-w-xl text-base text-white/90 sm:mt-4 sm:text-xl">
           Growing the Edmonton squash community
         </p>
-        <a
-          href={MEMBERSHIP_INFO_URL}
+        <Link
+          href="/membership-info/"
           className="mt-6 inline-block rounded-full bg-esc-red px-6 py-2.5 text-sm font-semibold text-white shadow-lg transition-colors hover:bg-esc-red-dark sm:mt-8 sm:px-8 sm:py-3 sm:text-base"
         >
           Get Started: Create Your Free Account
-        </a>
+        </Link>
       </div>
     </section>
   );

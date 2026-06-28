@@ -9,7 +9,3 @@ export const CLUB_EMAIL = "info@edmontonsquashclub.ca";
 export const CLUB_ADDRESS = "15330 111 Ave NW, Edmonton, AB T5M 4C8";
 export const CLUB_MAPS_URL =
   "https://www.google.com/maps/search/?api=1&query=15330+111+Ave+NW+Edmonton+AB+T5M+4C8";
-
-/** Until internal pages exist, membership info lives on the current site */
-export const MEMBERSHIP_INFO_URL =
-  "https://edmontonsquashclub.ca/membership-info/";
