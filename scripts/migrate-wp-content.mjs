@@ -49,12 +49,32 @@ function stripHtml(html) {
     .trim();
 }
 
+/** Keep in sync with src/lib/sanitize-content.ts */
+function sanitizeContent(html) {
+  let result = html;
+
+  result = result.replace(
+    /<iframe\b[^>]*\bsrc=["']https?:\/\/www\.google\.com\/maps\/embed\/v1\/place\?[^"']*?\bq=([^"'&]+)[^"']*["'][^>]*>\s*<\/iframe>/gi,
+    (_match, query) => {
+      const address = decodeURIComponent(
+        query.replace(/&#0*38;/g, "").replace(/&amp;/g, "&"),
+      ).replace(/\+/g, " ");
+      const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+      return `<p><a href="${mapsUrl}" target="_blank" rel="noopener noreferrer">View on Google Maps</a></p>`;
+    },
+  );
+
+  result = result.replace(/AIzaSy[A-Za-z0-9_-]{33}/g, "");
+
+  return result;
+}
+
 function toPageRecord(item) {
   return {
     slug: item.slug,
     title: item.title.rendered,
     excerpt: stripHtml(item.excerpt.rendered),
-    content: item.content.rendered,
+    content: sanitizeContent(item.content.rendered),
     modified: item.modified,
     yoastTitle: item.yoast_head_json?.title ?? null,
     yoastDescription: item.yoast_head_json?.description ?? null,
@@ -66,7 +86,7 @@ function toPostRecord(item) {
     slug: item.slug,
     title: item.title.rendered,
     excerpt: stripHtml(item.excerpt.rendered),
-    content: item.content.rendered,
+    content: sanitizeContent(item.content.rendered),
     date: item.date,
     modified: item.modified,
     yoastTitle: item.yoast_head_json?.title ?? null,

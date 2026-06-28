@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { sanitizeMigratedHtml } from "@/lib/sanitize-content";
 
 type PageContentProps = {
   html: string;
@@ -13,7 +14,7 @@ function rewriteLinks(html: string): string {
 }
 
 export default function PageContent({ html, className = "" }: PageContentProps) {
-  const content = rewriteLinks(html);
+  const content = rewriteLinks(sanitizeMigratedHtml(html));
 
   return (
     <div
