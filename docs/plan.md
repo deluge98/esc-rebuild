@@ -74,6 +74,11 @@ The WP REST API exports text, not Beaver Builder / Ultimate Addons layout (prici
 - [ ] `/events/` — empty placeholder on live site too — decide keep, remove, or rebuild
 - [ ] Spot-check iframe embed pages (e.g. `/doubles-squash/`, sponsor CPT pages)
 
+#### Security
+
+- [x] Strip Google Maps API keys from migrated content; sanitize on `migrate-content` and render (`src/lib/sanitize-content.ts`)
+- [ ] **Tell the club** (not sponsors) — old WP sponsor pages used the **club’s** Google Maps embed key; it was briefly in this repo (GitHub secret scan) and is still on the live WordPress site and in git history (`c1b9914`). Whoever manages ESC’s Google Cloud should **rotate and restrict** that key (HTTP referrer limits, etc.) and resolve the alert in GitHub once rotated.
+
 ### Phase 2 — Launch
 
 **Cutover** = after club approval, whoever manages DNS points `edmontonsquashclub.ca` from the WordPress host to Vercel.
