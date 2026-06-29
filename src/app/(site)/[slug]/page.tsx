@@ -4,6 +4,7 @@ import BlogListing from "@/components/BlogListing";
 import CourtBookingCalendar from "@/components/CourtBookingCalendar";
 import MembershipInfoPage from "@/components/MembershipInfoPage";
 import PageContent, { PageHeader } from "@/components/PageContent";
+import ProgramsPage from "@/components/ProgramsPage";
 import SponsorsPage from "@/components/SponsorsPage";
 import {
   getAllContentSlugs,
@@ -21,6 +22,7 @@ const SPECIAL_PAGES: Record<string, React.ComponentType> = {
   sponsors: SponsorsPage,
   "court-booking-calendar": CourtBookingCalendar,
   "membership-info": MembershipInfoPage,
+  programs: ProgramsPage,
 };
 
 function formatDate(dateStr: string): string {
@@ -74,7 +76,9 @@ export default async function ContentPage({ params }: Props) {
     <div className="bg-white py-10 sm:py-16">
       <div
         className={`mx-auto px-4 sm:px-6 ${
-          slug === "membership-info" ? "max-w-6xl" : "max-w-4xl"
+          slug === "membership-info" || slug === "programs"
+            ? "max-w-6xl"
+            : "max-w-4xl"
         }`}
       >
         {SpecialComponent ? (
