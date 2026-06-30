@@ -29,12 +29,19 @@ export function PageHeader({
   subtitle,
   backHref,
   backLabel,
+  variant = "default",
 }: {
   title: string;
   subtitle?: string;
   backHref?: string;
   backLabel?: string;
+  variant?: "default" | "display";
 }) {
+  const titleClass =
+    variant === "display"
+      ? "font-display text-[2.75rem] font-normal uppercase leading-none tracking-wide text-esc-black sm:text-[3.25rem] lg:text-[4.25rem]"
+      : "text-2xl font-bold uppercase tracking-wide text-esc-black sm:text-3xl lg:text-4xl";
+
   return (
     <header className="mb-8 sm:mb-10">
       {backHref && (
@@ -46,10 +53,10 @@ export function PageHeader({
         </Link>
       )}
       <h1
-        className="text-2xl font-bold uppercase tracking-wide text-esc-black sm:text-3xl lg:text-4xl"
+        className={titleClass}
         dangerouslySetInnerHTML={{ __html: title }}
       />
-      <div className="mt-3 h-1 w-16 bg-esc-red" />
+      {variant === "default" && <div className="mt-3 h-1 w-16 bg-esc-red" />}
       {subtitle && (
         <p className="mt-4 text-lg text-gray-600">{subtitle}</p>
       )}

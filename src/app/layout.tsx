@@ -1,11 +1,23 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Bebas_Neue, Geist, Roboto } from "next/font/google";
 import SkipLink from "@/components/SkipLink";
 import { SITE_URL } from "@/lib/site-url";
 import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const bebasNeue = Bebas_Neue({
+  weight: "400",
+  variable: "--font-bebas",
+  subsets: ["latin"],
+});
+
+const roboto = Roboto({
+  weight: ["400", "700"],
+  variable: "--font-roboto",
   subsets: ["latin"],
 });
 
@@ -36,7 +48,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} h-full antialiased`}>
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${bebasNeue.variable} ${roboto.variable} h-full antialiased`}
+    >
       <body className="flex min-h-full flex-col">
         <SkipLink />
         {children}

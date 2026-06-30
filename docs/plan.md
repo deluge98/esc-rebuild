@@ -59,20 +59,47 @@ Clone [edmontonsquashclub.ca](https://edmontonsquashclub.ca/) as a mobile-first 
 - [ ] Club reviews and approves at [esc-rebuild.vercel.app](https://esc-rebuild.vercel.app/)
 - [ ] **Ask with the approval request:** who can edit DNS for `edmontonsquashclub.ca`? (registrar, WordPress host, Cloudflare, etc. — we need edit access, not a domain transfer.) Launch = they approve the preview, then that person points the site records to Vercel. Leave MX (email) records unchanged unless we intentionally migrate mail.
 
-#### Beaver Builder & content gaps
+#### Beaver Builder & Ultimate Addons — replicate in React
 
-The WP REST API exports text, not Beaver Builder / Ultimate Addons layout (pricing tables, tabs, accordions, etc.). Pages like these need custom components or manual fixes before club approval.
+**Goal:** Every public page should visually match the live WordPress site. Beaver Builder (BB) and Ultimate Addons (UABB) layouts are **not** portable via the WP REST API — we rebuild them as React + Tailwind components, using migrated HTML as the content source where helpful.
 
-- [x] `/membership-info/` — pricing comparison table (`MembershipPricingTable`)
-- [x] `/court-booking-calendar/` — anonymized ClubInterconnect embed
-- [x] `/sponsors/` — sponsor grid + sponsorship CTA
-- [x] `/blog/` — post listing (WP page body was empty)
-- [ ] `/programs/` — rebuild tabs + accordions (BB layout does not migrate; page is currently a broken wall of HTML)
-- [ ] Individual membership pages (`/premium-membership/`, `/junior-membership/`, `/off-peak-membership/`, `/doubles-fitness-membership/`, `/basic-membership/`) — spot-check prose, photos, and Sign Up CTAs
-- [ ] `/yoga/` — Gravity Form will not submit after cutover; content is stale (2017) — replace form or link to external flow
-- [ ] `/subscribe-to-newsletter/` — fix broken demo assets; wire real newsletter signup
-- [ ] `/events/` — empty placeholder on live site too — decide keep, remove, or rebuild
-- [ ] Spot-check iframe embed pages (e.g. `/doubles-squash/`, sponsor CPT pages)
+**Why this is manual work:** BB stores layout in post meta; the API `content.rendered` field is often plain prose or a partial dump, not something we can drop in with BB’s CSS. Embedding BB plugin styles would be brittle and bad on mobile. The sustainable path is a small internal component library that mirrors the modules ESC actually uses.
+
+**Shared layout (all inner pages):**
+
+- [x] `PageHero` — featured-image banners (membership pages each have a unique hero graphic from WP media)
+- [x] Inner page shell — gray page background, white content card (GeneratePress `separate-containers` look)
+- [x] Typography — Bebas Neue headings + Roboto body to match live (membership pages)
+
+**Reusable module components** (build once, reuse across pages):
+
+| BB / UABB module | React component | Used on |
+|------------------|-----------------|---------|
+| Rich text, heading, photo, button | `PageContent` + `PageHero` | Most pages |
+| Pricing table (`fl-module-pricing-box`) | `MembershipPricingTable` ✅ | `/membership-info/` |
+| Advanced tabs + accordion | `ProgramsPage` / `ProgramsPageClient` ✅ (finish polish) | `/programs/` |
+| Post grid | `SponsorsPage` ✅ | `/sponsors/` |
+| Info box / callout / info banner | `InfoBox`, `Callout` | Homepage, coaches, yoga, sponsors |
+| Separator / spacer | Tailwind utilities | Various |
+| Video / iframe embed | `EmbedBlock` | Doubles squash, etc. |
+| Map (`fl-module-map`) | Static map image or Maps embed (club-rotated key) | Sponsor CPT pages |
+| Gravity Form (`fl-module-pp-gravity-form`) | External form link or new provider | `/yoga/`, `/subscribe-to-newsletter/` |
+
+**Per-page checklist** (~25 public pages; shop/cart/checkout/my-account excluded):
+
+- [x] `/membership-info/` — pricing table
+- [x] `/court-booking-calendar/` — ClubInterconnect embed
+- [x] `/sponsors/` — post grid + CTA
+- [x] `/blog/` — post listing
+- [ ] `/programs/` — tabs + accordions (component exists; match live styling)
+- [x] Membership detail pages — hero banner + prose layout (`/premium-membership/`, `/junior-membership/`, `/off-peak-membership/`, `/doubles-fitness-membership/`, `/basic-membership/`, `/basic-legacy-membership/`)
+- [ ] About / facilities pages — multi-column photo + heading layouts (`/facilities/`, `/coaches-and-club-pros/`, `/jobs/`, `/pro-shop/`, etc.)
+- [ ] Program subpages — prose + any BB widgets (`/adult-programs/`, `/junior-programs-2/`, `/fitness-programs/`, `/women-programs/`, `/doubles-squash/`)
+- [ ] `/yoga/` — info boxes + replace Gravity Form
+- [ ] `/subscribe-to-newsletter/` — replace broken form embed
+- [ ] Sponsor CPT pages — prose + map (`/bdo-sponsor/`, `/video-game-repairs-sponsor/`, etc.)
+- [ ] `/events/` — empty on live too; decide keep, remove, or rebuild
+- [ ] Homepage — refine to match live BB layout (callouts, info banners, icon group) beyond current Phase 0 demo
 
 #### Security
 

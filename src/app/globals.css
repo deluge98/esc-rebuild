@@ -17,6 +17,8 @@
   --color-esc-black: var(--esc-black);
   --color-esc-gray: var(--esc-gray);
   --font-sans: var(--font-geist-sans);
+  --font-display: var(--font-bebas);
+  --font-body: var(--font-roboto);
 }
 
 body {
@@ -143,5 +145,49 @@ body {
 .wp-content .wp-block-button__link:hover,
 .wp-content a[role="button"]:hover {
   background: var(--esc-red-dark);
+}
+
+/* Membership detail pages */
+.membership-detail-content {
+  font-family: var(--font-roboto), system-ui, sans-serif;
+}
+
+.membership-detail-content h1,
+.membership-detail-content h2,
+.membership-detail-content h3 {
+  font-family: var(--font-bebas), system-ui, sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.membership-detail-content h1 {
+  font-size: 2.25rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.membership-detail-content h2 {
+  font-size: 1.875rem;
+  margin-top: 1.75rem;
+}
+
+.membership-detail-content ul.membership-benefits {
+  list-style: none;
+  padding-left: 0;
+  margin: 1rem 0 1.5rem;
+}
+
+.membership-detail-content ul.membership-benefits li {
+  position: relative;
+  padding-left: 1.25rem;
+  margin-bottom: 0.4rem;
+}
+
+.membership-detail-content ul.membership-benefits li::before {
+  content: "–";
+  position: absolute;
+  left: 0;
+  color: var(--esc-red);
+  font-weight: 700;
 }
 

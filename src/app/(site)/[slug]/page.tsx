@@ -2,10 +2,15 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import BlogListing from "@/components/BlogListing";
 import CourtBookingCalendar from "@/components/CourtBookingCalendar";
+import InnerPageLayout from "@/components/InnerPageLayout";
+import MembershipDetailPage from "@/components/MembershipDetailPage";
 import MembershipInfoPage from "@/components/MembershipInfoPage";
 import PageContent, { PageHeader } from "@/components/PageContent";
+import PageHeroBanner from "@/components/PageHeroBanner";
 import ProgramsPage from "@/components/ProgramsPage";
 import SponsorsPage from "@/components/SponsorsPage";
+import { isMembershipDetailSlug } from "@/data/membership-pages";
+import { getPageHero } from "@/data/page-heroes";
 import {
   getAllContentSlugs,
   getContentBySlug,
@@ -82,41 +87,48 @@ export default async function ContentPage({ params }: Props) {
   const content = getContentBySlug(slug);
   if (!content) notFound();
 
+  if (isMembershipDetailSlug(slug)) {
+    return <MembershipDetailPage slug={slug} />;
+  }
+
   const SpecialComponent = SPECIAL_PAGES[slug];
+  const pageHero = content.type === "page" ? getPageHero(slug) : null;
+  const hero =
+    pageHero && content.type === "page" ? (
+      <PageHeroBanner slug={slug} title={content.data.title} />
+    ) : undefined;
+
+  if (SpecialComponent) {
+    return (
+      <InnerPageLayout hero={hero}>
+        <SpecialComponent />
+      </InnerPageLayout>
+    );
+  }
+
+  if (content.type === "post") {
+    return (
+      <InnerPageLayout>
+        <PageHeader
+          title={content.data.title}
+          backHref="/blog/"
+          backLabel="All posts"
+        />
+        <time
+          dateTime={content.data.date}
+          className="-mt-4 mb-6 block text-sm font-medium text-gray-500"
+        >
+          {formatDate(content.data.date)}
+        </time>
+        <PageContent html={content.data.content} />
+      </InnerPageLayout>
+    );
+  }
 
   return (
-    <div className="bg-white py-10 sm:py-16">
-      <div
-        className={`mx-auto px-4 sm:px-6 ${
-          slug === "membership-info" || slug === "programs"
-            ? "max-w-6xl"
-            : "max-w-4xl"
-        }`}
-      >
-        {SpecialComponent ? (
-          <SpecialComponent />
-        ) : content.type === "post" ? (
-          <>
-            <PageHeader
-              title={content.data.title}
-              backHref="/blog/"
-              backLabel="All posts"
-            />
-            <time
-              dateTime={content.data.date}
-              className="-mt-4 mb-6 block text-sm font-medium text-gray-500"
-            >
-              {formatDate(content.data.date)}
-            </time>
-            <PageContent html={content.data.content} />
-          </>
-        ) : (
-          <>
-            <PageHeader title={content.data.title} />
-            <PageContent html={content.data.content} />
-          </>
-        )}
-      </div>
-    </div>
+    <InnerPageLayout hero={hero}>
+      <PageHeader title={content.data.title} />
+      <PageContent html={content.data.content} />
+    </InnerPageLayout>
   );
 }

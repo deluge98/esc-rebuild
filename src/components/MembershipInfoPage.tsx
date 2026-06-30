@@ -3,9 +3,9 @@ import { PageHeader } from "@/components/PageContent";
 
 export default function MembershipInfoPage() {
   return (
-    <div>
-      <PageHeader title="Membership Info" />
+    <>
+      <PageHeader title="Membership Info" variant="display" />
       <MembershipPricingTable />
-    </div>
+    </>
   );
 }
