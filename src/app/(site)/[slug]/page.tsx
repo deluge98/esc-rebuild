@@ -12,6 +12,7 @@ import {
   type ContentRecord,
   type PostRecord,
 } from "@/lib/content";
+import { absoluteUrl } from "@/lib/site-url";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -35,6 +36,7 @@ function formatDate(dateStr: string): string {
 
 function buildMetadata(
   record: ContentRecord | PostRecord,
+  slug: string,
   isPost: boolean,
 ): Metadata {
   const title = record.yoastTitle?.replace(/ \| Edmonton Squash Club$/, "") ?? record.title;
@@ -42,14 +44,24 @@ function buildMetadata(
     record.yoastDescription ||
     record.excerpt ||
     `${record.title} — Edmonton Squash Club`;
+  const plainTitle = title.replace(/<[^>]+>/g, "");
+  const plainDescription = description.replace(/<[^>]+>/g, "").slice(0, 160);
+  const canonical = absoluteUrl(slug);
 
   return {
-    title: title.replace(/<[^>]+>/g, ""),
-    description: description.replace(/<[^>]+>/g, "").slice(0, 160),
+    title: plainTitle,
+    description: plainDescription,
+    alternates: {
+      canonical,
+    },
     openGraph: {
-      title: title.replace(/<[^>]+>/g, ""),
-      description: description.replace(/<[^>]+>/g, "").slice(0, 160),
+      title: plainTitle,
+      description: plainDescription,
       type: isPost ? "article" : "website",
+      url: canonical,
+      ...(isPost && "date" in record
+        ? { publishedTime: record.date }
+        : {}),
     },
   };
 }
@@ -62,7 +74,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const content = getContentBySlug(slug);
   if (!content) return {};
-  return buildMetadata(content.data, content.type === "post");
+  return buildMetadata(content.data, slug, content.type === "post");
 }
 
 export default async function ContentPage({ params }: Props) {

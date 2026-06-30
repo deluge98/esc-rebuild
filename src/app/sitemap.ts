@@ -1,19 +1,18 @@
 import type { MetadataRoute } from "next";
 import { getAllContentSlugs } from "@/lib/content";
-
-const SITE_URL = "https://esc-rebuild.vercel.app";
+import { absoluteUrl } from "@/lib/site-url";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const slugs = getAllContentSlugs();
 
   return [
     {
-      url: `${SITE_URL}/`,
+      url: absoluteUrl("/"),
       changeFrequency: "weekly",
       priority: 1,
     },
     ...slugs.map((slug) => ({
-      url: `${SITE_URL}/${slug}/`,
+      url: absoluteUrl(slug),
       changeFrequency: "monthly" as const,
       priority: slug.includes("membership") ? 0.9 : 0.7,
     })),
