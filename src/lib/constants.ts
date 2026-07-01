@@ -10,3 +10,22 @@ export const MEMBERSHIP_SIGNUP_MAILTO = `mailto:${CLUB_EMAIL}?subject=${encodeUR
 export const CLUB_ADDRESS = "15330 111 Ave NW, Edmonton, AB T5M 4C8";
 export const CLUB_MAPS_URL =
   "https://www.google.com/maps/search/?api=1&query=15330+111+Ave+NW+Edmonton+AB+T5M+4C8";
+
+export const SOCIAL_LINKS = [
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/edmontonsquashclub/",
+  },
+  {
+    label: "Twitter",
+    href: "https://twitter.com/YEGSquashClub",
+  },
+  {
+    label: "YouTube",
+    href: "https://www.youtube.com/channel/UC4-hHQLVKQBzLFU98qY-pKQ",
+  },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/edmontonsquashclub/",
+  },
+] as const;
