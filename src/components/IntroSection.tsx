@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function IntroSection() {
   return (
     <section className="bg-white py-10 sm:py-20">
-      <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16">
+      <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 sm:px-6 md:grid-cols-2 md:gap-16">
         <div>
           <h2 className="text-2xl font-bold uppercase tracking-wide text-esc-black sm:text-3xl">
             Edmonton&apos;s Best Squash Destination
@@ -21,7 +21,7 @@ export default function IntroSection() {
             alt="Women playing squash at Edmonton Squash Club"
             fill
             className="object-cover"
-            sizes="(max-width: 1024px) 100vw, 50vw"
+            sizes="(max-width: 768px) 100vw, 50vw"
           />
         </div>
       </div>
