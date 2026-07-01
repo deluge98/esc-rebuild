@@ -38,7 +38,7 @@ export default function Sponsors({ embedded = false }: { embedded?: boolean }) {
         </>
       )}
 
-        <ul className="mt-8 grid grid-cols-2 items-center gap-4 sm:grid-cols-3 sm:gap-6 lg:grid-cols-4">
+        <ul className="mt-8 grid grid-cols-2 items-center gap-4 sm:grid-cols-3 sm:gap-6 md:grid-cols-4">
           {goldSponsors.map((sponsor) => (
             <li key={sponsor.name}>
               {sponsor.href ? (

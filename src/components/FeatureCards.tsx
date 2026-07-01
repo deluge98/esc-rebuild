@@ -23,7 +23,7 @@ export default function FeatureCards() {
   return (
     <section className="bg-esc-gray py-10 sm:py-20">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="grid gap-6 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 sm:gap-8 md:grid-cols-3">
           {features.map((feature) => (
             <article
               key={feature.title}
