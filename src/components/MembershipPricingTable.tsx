@@ -38,6 +38,21 @@ function FeatureIcon({ included }: { included: boolean }) {
   );
 }
 
+function SignUpLink({ href }: { href: string }) {
+  const isExternal = href.startsWith("http");
+  return (
+    <a
+      href={href}
+      {...(isExternal
+        ? { target: "_blank", rel: "noopener noreferrer" }
+        : {})}
+      className="inline-block rounded bg-[#ed1c24] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#c41230]"
+    >
+      Sign Up
+    </a>
+  );
+}
+
 function featureRowClass(index: number): string {
   return index % 2 === 1 ? "bg-[#1ad8c8]" : "bg-white";
 }
@@ -46,7 +61,7 @@ export default function MembershipPricingTable() {
   return (
     <div>
       {/* Desktop comparison table */}
-      <div className="membership-pricing-table hidden overflow-x-auto lg:block">
+      <div className="membership-pricing-table hidden overflow-x-auto md:block">
         <div className="min-w-[760px] border-4 border-[#7a93ac]">
           <div className="grid grid-cols-5">
             {/* Tier name row */}
@@ -94,14 +109,7 @@ export default function MembershipPricingTable() {
             <div className="bg-[#fcfff7] px-2 py-5" />
             {MEMBERSHIP_TIERS.map((tier) => (
               <div key={`${tier.id}-cta`} className="bg-[#f7f7f7] px-2 py-5 text-center">
-                <a
-                  href={tier.signUpUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block rounded bg-[#ed1c24] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#c41230]"
-                >
-                  Sign Up
-                </a>
+                <SignUpLink href={tier.signUpUrl} />
               </div>
             ))}
           </div>
@@ -109,7 +117,7 @@ export default function MembershipPricingTable() {
       </div>
 
       {/* Mobile stacked tiers */}
-      <div className="space-y-6 lg:hidden">
+      <div className="space-y-6 md:hidden">
         {MEMBERSHIP_TIERS.map((tier) => (
           <div key={tier.id} className="overflow-hidden border-4 border-[#7a93ac]">
             <div className="bg-[#f7f7f7] px-4 py-4 text-center text-sm font-semibold">
@@ -130,14 +138,7 @@ export default function MembershipPricingTable() {
               ))}
             </ul>
             <div className="bg-[#f7f7f7] px-4 py-5 text-center">
-              <a
-                href={tier.signUpUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block rounded bg-[#ed1c24] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#c41230]"
-              >
-                Sign Up
-              </a>
+              <SignUpLink href={tier.signUpUrl} />
             </div>
           </div>
         ))}

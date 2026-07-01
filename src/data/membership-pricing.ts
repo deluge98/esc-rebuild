@@ -1,3 +1,5 @@
+import { MEMBERSHIP_SIGNUP_MAILTO } from "@/lib/constants";
+
 export type MembershipTier = {
   id: string;
   name: string;
@@ -25,28 +27,28 @@ export const MEMBERSHIP_TIERS: MembershipTier[] = [
     id: "junior-student",
     name: "Junior/Student",
     price: "$65.00 / Month",
-    signUpUrl: "https://ts2.clubinterconnect.com/edmonton/",
+    signUpUrl: MEMBERSHIP_SIGNUP_MAILTO,
     included: [true, true, true, true, true, true, true, true, true, true],
   },
   {
     id: "off-peak",
     name: "Off Peak",
     price: "$65.00 / Month",
-    signUpUrl: "https://ts2.clubinterconnect.com/edmonton/",
+    signUpUrl: MEMBERSHIP_SIGNUP_MAILTO,
     included: [true, true, true, true, true, true, true, false, false, false],
   },
   {
     id: "premium",
     name: "Premium",
     price: "$130 / Month",
-    signUpUrl: "https://ts2.clubinterconnect.com/edmonton/",
+    signUpUrl: MEMBERSHIP_SIGNUP_MAILTO,
     included: [true, true, true, true, true, true, true, true, true, true],
   },
   {
     id: "doubles",
     name: "Doubles",
     price: "$50.00 / Month",
-    signUpUrl: "https://ts2.clubinterconnect.com/edmonton/",
+    signUpUrl: MEMBERSHIP_SIGNUP_MAILTO,
     included: [true, true, true, true, true, false, false, false, false, false],
   },
 ];

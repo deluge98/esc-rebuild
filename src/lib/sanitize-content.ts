@@ -1,9 +1,17 @@
+import { CLUB_EMAIL } from "@/lib/constants";
+
 /**
  * Sanitize HTML migrated from WordPress before storage or render.
  * Strips secrets and replaces embeds that require API keys.
  */
 export function sanitizeMigratedHtml(html: string): string {
   let result = html;
+
+  // ClubInterconnect booking embeds are no longer available.
+  result = result.replace(
+    /<iframe\b[^>]*\bsrc=["']https?:\/\/[^"']*clubinterconnect\.com[^"']*["'][^>]*>\s*<\/iframe>/gi,
+    `<p>Online court bookings are managed through our member portal. Members can log in to book courts, or contact <a href="mailto:${CLUB_EMAIL}">${CLUB_EMAIL}</a> for assistance.</p>`,
+  );
 
   // Google Maps embed iframes include API keys — link out instead.
   result = result.replace(

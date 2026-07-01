@@ -54,6 +54,11 @@ function sanitizeContent(html) {
   let result = html;
 
   result = result.replace(
+    /<iframe\b[^>]*\bsrc=["']https?:\/\/[^"']*clubinterconnect\.com[^"']*["'][^>]*>\s*<\/iframe>/gi,
+    "<p>Online court bookings are managed through our member portal. Contact info@edmontonsquashclub.ca for assistance.</p>",
+  );
+
+  result = result.replace(
     /<iframe\b[^>]*\bsrc=["']https?:\/\/www\.google\.com\/maps\/embed\/v1\/place\?[^"']*?\bq=([^"'&]+)[^"']*["'][^>]*>\s*<\/iframe>/gi,
     (_match, query) => {
       const address = decodeURIComponent(

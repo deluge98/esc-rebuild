@@ -6,6 +6,7 @@ export const CATCH_CORNER_BOOKING_URL =
 export const CLUB_PHONE = "(780) 306-2395";
 export const CLUB_PHONE_TEL = "+17803062395";
 export const CLUB_EMAIL = "info@edmontonsquashclub.ca";
+export const MEMBERSHIP_SIGNUP_MAILTO = `mailto:${CLUB_EMAIL}?subject=${encodeURIComponent("Membership signup")}`;
 export const CLUB_ADDRESS = "15330 111 Ave NW, Edmonton, AB T5M 4C8";
 export const CLUB_MAPS_URL =
   "https://www.google.com/maps/search/?api=1&query=15330+111+Ave+NW+Edmonton+AB+T5M+4C8";

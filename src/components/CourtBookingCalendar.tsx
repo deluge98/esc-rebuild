@@ -1,4 +1,10 @@
-import { CLUB_EMAIL, CLUB_PHONE, CLUB_PHONE_TEL } from "@/lib/constants";
+import {
+  CATCH_CORNER_BOOKING_URL,
+  CLUB_EMAIL,
+  CLUB_PHONE,
+  CLUB_PHONE_TEL,
+  COURT_RESERVE_LOGIN_URL,
+} from "@/lib/constants";
 import { PageHeader } from "@/components/PageContent";
 
 export default function CourtBookingCalendar() {
@@ -8,15 +14,12 @@ export default function CourtBookingCalendar() {
       <div className="space-y-4 text-gray-700">
         <p>
           For privacy reasons, the booking interface with names is only available
-          to members. Sometimes it&apos;s nice to get an idea if there&apos;s a
-          court free on short notice, or for new members to get a sense of
-          whether they&apos;ll be able to get a court at their preferred time a
-          week ahead of time, so here&apos;s an anonymized view of the court
-          bookings.
+          to members. Members can log in to Court Reserve to view and manage
+          court bookings.
         </p>
         <p>
-          Please note that this is not a booking interface. If you are a
-          non-member and want to book a court, please contact the front desk at{" "}
+          If you are a non-member and want to book a court, please contact the
+          front desk at{" "}
           <a href={`mailto:${CLUB_EMAIL}`} className="text-esc-red hover:underline">
             {CLUB_EMAIL}
           </a>{" "}
@@ -28,12 +31,23 @@ export default function CourtBookingCalendar() {
         </p>
       </div>
 
-      <div className="mt-8 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
-        <iframe
-          src="https://ts2.clubinterconnect.com/edmonton/home/calendarDayBlankView.do?id=59"
-          title="Anonymized court booking calendar"
-          className="h-[600px] w-full sm:h-[700px]"
-        />
+      <div className="mt-8 flex flex-wrap gap-3">
+        <a
+          href={COURT_RESERVE_LOGIN_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center justify-center rounded-full bg-esc-red px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-esc-red-dark"
+        >
+          Member Login
+        </a>
+        <a
+          href={CATCH_CORNER_BOOKING_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center justify-center rounded-full border border-esc-red px-5 py-2.5 text-sm font-semibold text-esc-red transition-colors hover:bg-esc-red hover:text-white"
+        >
+          Book a Court
+        </a>
       </div>
     </div>
   );

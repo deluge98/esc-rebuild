@@ -33,6 +33,16 @@ const nextConfig: NextConfig = {
         destination: "https://edmontonsquashclub.ca/my-account/",
         permanent: true,
       },
+      {
+        source: "/event/:path*",
+        destination: "/events/",
+        permanent: false,
+      },
+      {
+        source: "/events/:year(\\d{4})-:month(\\d{2})/:path*",
+        destination: "/events/",
+        permanent: false,
+      },
     ];
   },
 };

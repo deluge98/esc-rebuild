@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { rewriteMigratedLinks } from "@/lib/rewrite-links";
 import { sanitizeMigratedHtml } from "@/lib/sanitize-content";
 
 type PageContentProps = {
@@ -6,15 +7,8 @@ type PageContentProps = {
   className?: string;
 };
 
-/** Rewrite internal WP links to local paths. */
-function rewriteLinks(html: string): string {
-  return html
-    .replace(/https?:\/\/(?:www\.)?edmontonsquashclub\.ca/gi, "")
-    .replace(/href="\/\/edmontonsquashclub\.ca/gi, 'href="');
-}
-
 export default function PageContent({ html, className = "" }: PageContentProps) {
-  const content = rewriteLinks(sanitizeMigratedHtml(html));
+  const content = rewriteMigratedLinks(sanitizeMigratedHtml(html));
 
   return (
     <div

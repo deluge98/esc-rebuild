@@ -30,19 +30,9 @@ function AccordionItem({
         >
           {isOpen ? "−" : "+"}
         </span>
-        {item.href ? (
-          <a
-            href={item.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-base font-semibold text-esc-red hover:text-esc-red-dark"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {item.title}
-          </a>
-        ) : (
-          <span className="text-base font-semibold text-esc-red">{item.title}</span>
-        )}
+        <span className="text-base font-semibold text-esc-red underline decoration-esc-red underline-offset-2">
+          {item.title}
+        </span>
       </button>
       {isOpen && (
         <div

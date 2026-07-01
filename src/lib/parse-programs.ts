@@ -1,8 +1,8 @@
+import { rewriteMigratedLinks } from "@/lib/rewrite-links";
 import { sanitizeMigratedHtml } from "@/lib/sanitize-content";
 
 export type ProgramAccordionItem = {
   title: string;
-  href?: string;
   contentHtml: string;
 };
 
@@ -20,21 +20,12 @@ const PROGRAM_SECTIONS: { title: string; id: string }[] = [
   { title: "Drop In Squash", id: "drop-in" },
 ];
 
-function rewriteLinks(html: string): string {
-  return html
-    .replace(/https?:\/\/(?:www\.)?edmontonsquashclub\.ca/gi, "")
-    .replace(/href="\/\/edmontonsquashclub\.ca/gi, 'href="');
-}
-
-function stripLabelHtml(html: string): { title: string; href?: string } {
-  const linkMatch = html.match(/<a\b[^>]*\bhref=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/i);
+function stripLabelHtml(html: string): string {
+  const linkMatch = html.match(/<a\b[^>]*>([\s\S]*?)<\/a>/i);
   if (linkMatch) {
-    return {
-      href: linkMatch[1],
-      title: linkMatch[2].replace(/<[^>]+>/g, "").trim(),
-    };
+    return linkMatch[1].replace(/<[^>]+>/g, "").trim();
   }
-  return { title: html.replace(/<[^>]+>/g, "").trim() };
+  return html.replace(/<[^>]+>/g, "").trim();
 }
 
 function parseAccordionItems(sectionHtml: string): ProgramAccordionItem[] {
@@ -50,13 +41,12 @@ function parseAccordionItems(sectionHtml: string): ProgramAccordionItem[] {
     );
     if (!labelMatch || !contentMatch) continue;
 
-    const { title, href } = stripLabelHtml(labelMatch[1]);
+    const title = stripLabelHtml(labelMatch[1]);
     if (!title) continue;
 
     items.push({
       title,
-      href,
-      contentHtml: rewriteLinks(sanitizeMigratedHtml(contentMatch[1].trim())),
+      contentHtml: rewriteMigratedLinks(sanitizeMigratedHtml(contentMatch[1].trim())),
     });
   }
 
