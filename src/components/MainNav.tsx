@@ -103,11 +103,11 @@ export default function MainNav() {
   return (
     <>
       <nav aria-label="Main navigation" className="border-t-2 border-esc-red bg-esc-black">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 lg:justify-center">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 md:justify-center">
           <button
             type="button"
             onClick={() => setMobileOpen(true)}
-            className="flex items-center gap-2 py-2.5 text-sm font-medium uppercase tracking-wide text-white lg:hidden"
+            className="flex items-center gap-2 py-2.5 text-sm font-medium uppercase tracking-wide text-white md:hidden"
             aria-expanded={mobileOpen}
             aria-controls="mobile-nav"
           >
@@ -117,7 +117,7 @@ export default function MainNav() {
             Menu
           </button>
 
-          <ul className="hidden items-center lg:flex">
+          <ul className="hidden items-center md:flex">
             <li>
               <Link
                 href="/"
@@ -134,7 +134,7 @@ export default function MainNav() {
             ))}
           </ul>
 
-          <div className="py-2.5 lg:hidden" aria-hidden="true">
+          <div className="py-2.5 md:hidden" aria-hidden="true">
             <span className="text-xs font-medium uppercase tracking-wide text-white/50">
               Edmonton Squash Club
             </span>
@@ -143,7 +143,7 @@ export default function MainNav() {
       </nav>
 
       {mobileOpen && (
-        <div className="fixed inset-0 z-[60] lg:hidden" id="mobile-nav">
+        <div className="fixed inset-0 z-[60] md:hidden" id="mobile-nav">
           <button
             type="button"
             className="absolute inset-0 bg-black/50"
