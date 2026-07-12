@@ -5,6 +5,7 @@ Mobile-first Next.js rebuild of [edmontonsquashclub.ca](https://edmontonsquashcl
 ## Docs
 
 - **[docs/plan.md](./docs/plan.md)** — rebuild plan (phases, launch criteria, decisions)
+- **[docs/launch-checklist.md](./docs/launch-checklist.md)** — club launch / post-launch / long-term list with status
 
 ## Run locally
 
@@ -14,6 +15,10 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
+
+```bash
+npm test
+```
 
 ## Current status
 

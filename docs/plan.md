@@ -4,6 +4,8 @@
 
 **Preview:** [esc-rebuild.vercel.app](https://esc-rebuild.vercel.app/)
 
+**Club checklist (launch / post-launch / long-term):** [launch-checklist.md](./launch-checklist.md)
+
 ---
 
 ## Goal
@@ -31,7 +33,7 @@ Clone [edmontonsquashclub.ca](https://edmontonsquashclub.ca/) as a mobile-first 
 ## Decisions
 
 - **Content** — Drew maintains the repo for v1. Club sends text/image changes; Drew ships via PR. Volunteers can get GitHub access + Claude Code later; CMS (Decap/Sanity) only if that becomes painful.
-- **SEO** — Clone with same URL paths wherever possible. 301s in `next.config.ts` only for removed or renamed pages. Export WP URLs via `/wp-json/wp/v2/pages` to verify nothing is missed.
+- **SEO** — Same URL paths as live wherever possible. **Titles** match live one-to-one (en dash pattern, homepage tagline). **Meta description + Open Graph** should always be present — if live omits them, fill the gap (`yoastDescription` / `excerpt` / homepage defaults). 301s in `next.config.ts` only for removed or renamed pages. Export WP URLs via `/wp-json/wp/v2/pages` to verify nothing is missed.
 - **Rollback** — Keep WordPress host alive 2–4 weeks after launch. Rollback = point DNS back to the old host (minutes to a few hours). Don't delete WP until Search Console looks clean.
 - **Ownership** — Personal GitHub repo is fine through preview and launch. Transfer to a club org (or add club admins) when practical so the asset isn't tied to one person.
 
@@ -112,7 +114,8 @@ Clone [edmontonsquashclub.ca](https://edmontonsquashclub.ca/) as a mobile-first 
 
 - [ ] Export all live WP URLs; confirm new site matches paths (or document exceptions)
 - [ ] Redirect map → `next.config.ts` + `docs/redirects.md` (only for changed/removed paths)
-- [ ] `sitemap.ts`, `robots.ts`, per-page metadata
+- [x] `sitemap.ts`, `robots.ts`
+- [x] Per-page `<title>` match live WP 1:1 (en dash); always emit meta description + Open Graph (fill gaps when live is blank)
 - [ ] QA on real devices
 - [ ] DNS cutover; verify Google Search Console
 - [ ] Keep WordPress up until indexing is clean; then decommission

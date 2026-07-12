@@ -17,6 +17,11 @@ import {
   type ContentRecord,
   type PostRecord,
 } from "@/lib/content";
+import {
+  fullPageTitle,
+  plainMetaDescription,
+  plainTitle,
+} from "@/lib/seo-text";
 import { absoluteUrl } from "@/lib/site-url";
 
 type Props = {
@@ -44,24 +49,30 @@ function buildMetadata(
   slug: string,
   isPost: boolean,
 ): Metadata {
-  const title = record.yoastTitle?.replace(/ \| Edmonton Squash Club$/, "") ?? record.title;
-  const description =
+  const rawTitle =
+    record.yoastTitle?.replace(/ [–|] Edmonton Squash Club$/u, "") ??
+    record.title;
+  const pageTitle = plainTitle(rawTitle);
+  const documentTitle = fullPageTitle(pageTitle);
+  const description = plainMetaDescription(
     record.yoastDescription ||
-    record.excerpt ||
-    `${record.title} — Edmonton Squash Club`;
-  const plainTitle = title.replace(/<[^>]+>/g, "");
-  const plainDescription = description.replace(/<[^>]+>/g, "").slice(0, 160);
+      record.excerpt ||
+      `${record.title} — Edmonton Squash Club`,
+  );
   const canonical = absoluteUrl(slug);
 
   return {
-    title: plainTitle,
-    description: plainDescription,
+    // Absolute so <title> and og:title stay identical (no template double-suffix).
+    title: {
+      absolute: documentTitle,
+    },
+    description,
     alternates: {
       canonical,
     },
     openGraph: {
-      title: plainTitle,
-      description: plainDescription,
+      title: documentTitle,
+      description,
       type: isPost ? "article" : "website",
       url: canonical,
       ...(isPost && "date" in record

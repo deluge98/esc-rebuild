@@ -21,11 +21,14 @@ const roboto = Roboto({
   subsets: ["latin"],
 });
 
+// Titles match live WP (en dash). Meta description + Open Graph are filled
+// even when live omits them — missing SEO on the old site is a gap to close.
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Edmonton Squash Club",
-    template: "%s | Edmonton Squash Club",
+    default:
+      "Edmonton Squash Club – A Squash Club for Squash Players by Squash Players",
+    template: "%s – Edmonton Squash Club",
   },
   description:
     "Edmonton's only dedicated squash facility. Leagues, lessons, and programs for players ages 4 to 100.",
@@ -33,9 +36,10 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "Edmonton Squash Club",
+    title:
+      "Edmonton Squash Club – A Squash Club for Squash Players by Squash Players",
     description:
-      "Edmonton's only dedicated squash facility. Growing the Edmonton squash community.",
+      "Edmonton's only dedicated squash facility. Leagues, lessons, and programs for players ages 4 to 100.",
     locale: "en_CA",
     type: "website",
     url: "/",
