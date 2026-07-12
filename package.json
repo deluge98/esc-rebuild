@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint",
     "test": "vitest run",
-    "migrate-content": "node scripts/migrate-wp-content.mjs"
+    "migrate-content": "node scripts/migrate-wp-content.mjs",
+    "download-images": "bash scripts/download-images.sh",
+    "download-content-images": "node scripts/download-content-images.mjs"
   },
   "dependencies": {
     "next": "16.2.6",

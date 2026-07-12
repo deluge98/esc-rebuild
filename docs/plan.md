@@ -17,7 +17,8 @@ Clone [edmontonsquashclub.ca](https://edmontonsquashclub.ca/) as a mobile-first 
 | Member login | [CourtReserve](https://app.courtreserve.com/) |
 | Non-member court booking | [CatchCorner](https://www.catchcorner.com/facility-page/embedded/rental/889) |
 | Court booking calendar | Anonymized embed (same as current site) |
-| Membership signup (for now) | Gravity Forms embed or link to current flows |
+| Membership signup (for now) | ClubInterconnect / mailto — not Gravity Forms on membership pages |
+| Program / ambassador inquiry forms | **Undecided** — live uses Gravity Forms; clone has copy only (see launch checklist) |
 
 ---
 
@@ -27,6 +28,7 @@ Clone [edmontonsquashclub.ca](https://edmontonsquashclub.ca/) as a mobile-first 
 - [ ] Member login → CourtReserve
 - [ ] Court booking → CatchCorner
 - [ ] 301 redirects for any URL that changes; no broken bookmarks or SEO cliff
+- [ ] **Forms plan decided** for nav-linked Gravity Forms (`/adult-programs/`, `/junior-programs-2/`, `/junior-programs-2-copy/`, `/become-an-esc-club-ambassador/`) — keep WP subdomain, replace provider, or link/mailto for v1. Details: [launch-checklist.md](./launch-checklist.md)
 
 ---
 
@@ -85,7 +87,7 @@ Clone [edmontonsquashclub.ca](https://edmontonsquashclub.ca/) as a mobile-first 
 | Separator / spacer | Tailwind utilities | Various |
 | Video / iframe embed | `EmbedBlock` | Doubles squash, etc. |
 | Map (`fl-module-map`) | Static map image or Maps embed (club-rotated key) | Sponsor CPT pages |
-| Gravity Form (`fl-module-pp-gravity-form`) | External form link or new provider | `/yoga/`, `/subscribe-to-newsletter/` |
+| Gravity Form (`fl-module-pp-gravity-form`) | **Not in clone yet** — decide before launch (WP subdomain / new provider / mailto) | `/adult-programs/`, `/junior-programs-2/`, `/junior-programs-2-copy/`, `/become-an-esc-club-ambassador/` (+ yoga/newsletter) |
 
 **Per-page checklist** (~25 public pages; shop/cart/checkout/my-account excluded):
 

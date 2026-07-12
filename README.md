@@ -26,7 +26,9 @@ npm test
 
 Refresh content from WordPress: `npm run migrate-content`
 
-Re-download images: `bash scripts/download-images.sh`
+Re-download curated assets (logo, heroes, sponsors, staff): `npm run download-images`
+
+Mirror migrated content images into `public/wp-content/uploads/`: `npm run download-content-images`
 
 ## Stack
 

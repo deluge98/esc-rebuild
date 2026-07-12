@@ -15,19 +15,17 @@ describe("rewriteMigratedLinks", () => {
     assert.doesNotMatch(html, /edmontonsquashclub\.ca/);
   });
 
-  test("leaves WP image src and srcset absolute (do not strip domain)", () => {
+  test("rewrites WP upload media to local public paths", () => {
     const html = rewriteMigratedLinks(
       `<img src="https://edmontonsquashclub.ca/wp-content/uploads/2018/03/x.jpg" srcset="https://edmontonsquashclub.ca/wp-content/uploads/2018/03/x-300.jpg 300w" />`,
     );
 
+    assert.match(html, /src="\/wp-content\/uploads\/2018\/03\/x\.jpg"/);
     assert.match(
       html,
-      /src="https:\/\/edmontonsquashclub\.ca\/wp-content\/uploads\/2018\/03\/x\.jpg"/,
+      /srcset="\/wp-content\/uploads\/2018\/03\/x-300\.jpg 300w"/,
     );
-    assert.match(
-      html,
-      /srcset="https:\/\/edmontonsquashclub\.ca\/wp-content\/uploads\/2018\/03\/x-300\.jpg 300w"/,
-    );
+    assert.doesNotMatch(html, /edmontonsquashclub\.ca/);
   });
 
   test("rewrites protocol-relative WP hrefs", () => {

@@ -26,3 +26,7 @@ fetch sponsor-task-concrete.png "https://edmontonsquashclub.ca/wp-content/upload
 fetch sponsor-timber-benefits.png "https://edmontonsquashclub.ca/wp-content/uploads/2024/01/Timber_Logo_CMYK-1-300x106.png"
 fetch sponsor-cmb-insurance.png "https://edmontonsquashclub.ca/wp-content/uploads/2024/01/cmb-logo-footer.png"
 fetch sponsor-rotex-supply.jpg "https://edmontonsquashclub.ca/wp-content/uploads/2024/01/New-Logo-Black-w-red-1-300x193.jpg"
+
+mkdir -p "$DEST/staff"
+# Stable media-library original (not Beaver Builder cache hash).
+fetch staff/jeff-williams.jpg "https://edmontonsquashclub.ca/wp-content/uploads/2022/12/IMG_4388-scaled.jpeg"

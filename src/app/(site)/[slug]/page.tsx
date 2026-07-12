@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import AboutUsPage from "@/components/AboutUsPage";
 import BlogListing from "@/components/BlogListing";
 import CourtBookingCalendar from "@/components/CourtBookingCalendar";
 import InnerPageLayout from "@/components/InnerPageLayout";
@@ -34,6 +35,7 @@ const SPECIAL_PAGES: Record<string, React.ComponentType> = {
   "court-booking-calendar": CourtBookingCalendar,
   "membership-info": MembershipInfoPage,
   programs: ProgramsPage,
+  "coaches-and-club-pros": AboutUsPage,
 };
 
 function formatDate(dateStr: string): string {

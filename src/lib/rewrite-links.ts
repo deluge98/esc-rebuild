@@ -1,5 +1,7 @@
 import { CLUB_EMAIL } from "@/lib/constants";
 
+const WP_UPLOADS =
+  /https?:\/\/(?:www\.)?edmontonsquashclub\.ca(\/wp-content\/uploads\/[^"'\s)]+)/gi;
 const WP_PROTOCOL_RELATIVE = /href=(["'])\/\/edmontonsquashclub\.ca/gi;
 const CLUB_INTERCONNECT_HREF =
   /href=(["'])(https?:\/\/[^"']*clubinterconnect\.com[^"']*)\1/gi;
@@ -25,12 +27,15 @@ export function rewriteMigratedLinks(html: string): string {
     return `href=${quote}${clubInterconnectReplacement(url)}${quote}`;
   });
 
-  // Rewrite internal page links only — do not strip the domain from img/src URLs.
+  // Point media at locally mirrored files under public/wp-content/uploads.
+  result = result.replace(WP_UPLOADS, "$1");
+
+  // Rewrite remaining internal page links (not uploads).
   result = result.replace(
     /href=(["'])https?:\/\/(?:www\.)?edmontonsquashclub\.ca([^"']*)\1/gi,
     (_match, quote, path: string) => `href=${quote}${path || "/"}${quote}`,
   );
-  result = result.replace(WP_PROTOCOL_RELATIVE, 'href=$1');
+  result = result.replace(WP_PROTOCOL_RELATIVE, "href=$1");
 
   result = result.replace(DEAD_EVENT_PATH, 'href="/events/"');
 

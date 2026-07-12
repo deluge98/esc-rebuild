@@ -17,13 +17,30 @@ Source list from the club (launch / post-launch / long-term). Status reflects th
 - Leave MX (email) records alone unless mail is intentionally migrated.
 - See also Phase 2 cutover notes in [plan.md](./plan.md).
 
-### Redirect WordPress installation for forms only → `contact.edmontonsquashclub.ca`
+### Decide what to do about live Gravity Forms (launch blocker)
 
-**Status:** Not started
+**Status:** Not started — needs a decision before DNS cutover
 
-- Rebuild currently has no Gravity Forms embeds; newsletter/yoga form pages are content-only placeholders.
-- `next.config.ts` redirects shop/cart/checkout/my-account back to the live WP host, but nothing yet points forms traffic at `contact.edmontonsquashclub.ca`.
-- Likely approach: keep a slim WP (or form host) on the `contact.` subdomain; point form URLs / embeds there; main site stays on Vercel.
+The Next.js clone has page **copy** for these routes but **no working forms**. Live WordPress embeds Gravity Forms on pages linked from the main nav; cutover without a plan strands them.
+
+**Working forms on live (main nav):**
+
+| Nav path | Page | Gravity Form |
+|----------|------|--------------|
+| Programs → Adult Programs | `/adult-programs/` | `#87` |
+| Programs → Junior Programs | `/junior-programs-2/` | `#86` |
+| Programs → Lesson Packages | `/junior-programs-2-copy/` | `#87` (same as adult) |
+| About → Club Ambassador | `/become-an-esc-club-ambassador/` | `#23` |
+
+**Also form-adjacent (not in live main nav):** `/subscribe-to-newsletter/` (Beaver Builder subscribe widget); `/yoga/` (GF module present but empty/broken on live).
+
+**Options to decide (pick one or combine):**
+
+1. Keep a slim WordPress (or form host) on `contact.edmontonsquashclub.ca` and send form traffic there
+2. Replace with a new provider / native forms on the Next.js site
+3. Soften to mailto / external links for v1 launch
+
+Until decided: do not treat “full site clone” as including working form submit.
 
 ### Page Title and Meta description fields on pages
 
@@ -44,6 +61,14 @@ Source list from the club (launch / post-launch / long-term). Status reflects th
 **Status:** Not started
 
 Homepage (`src/app/(site)/page.tsx`) is Hero → Intro → FeatureCards → Sponsors. No adboard / digital board iframe yet. Needs the embed URL (or snippet) from Patrick, then an embed component on the home page (we already use iframe-style embeds elsewhere, e.g. court calendar / `EmbedBlock`).
+
+### Media mirroring (do not hotlink WordPress after cutover)
+
+**Status:** In progress / tooling in place
+
+- Curated assets (logo, heroes, sponsors, staff): `npm run download-images` → `public/images/`
+- Migrated page/post uploads: `npm run download-content-images` → `public/wp-content/uploads/`
+- Render rewrites absolute WP upload URLs to local `/wp-content/uploads/...` paths (`src/lib/rewrite-links.ts`)
 
 ---
 
@@ -79,7 +104,7 @@ Current membership pages and pricing table still reflect the migrated WP structu
 | Instagram feed on homepage | Not started | Footer links to Instagram only (`src/lib/constants.ts`) |
 | Content review | Not started | Overlaps short-term cleanup; ongoing |
 | WhatsApp signup requests | Not started | No WhatsApp CTA / form flow in the rebuild |
-| Form routing and integration | Not started | Tied to `contact.` subdomain + form provider choice |
+| Form routing and integration | Not started | See launch item: decide WP subdomain vs new provider vs mailto |
 | Email signup & ESP integration | Not started | Same as mail list / newsletter page |
 
 ---
@@ -87,7 +112,7 @@ Current membership pages and pricing table still reflect the migrated WP structu
 ## Suggested order (when unblocking launch)
 
 1. DNS ownership + Vercel records for `.ca` / `.org`  
-2. Forms host plan (`contact.` subdomain) so cutover doesn’t strand Gravity Forms  
+2. **Forms decision** (Adult / Junior / Lesson Packages / Ambassador — see above)  
 3. Adboard embed URL from Patrick → homepage  
 4. Spot-check titles vs live; review meta descriptions on key pages (home + memberships)  
 5. After launch: Jegysoft/PlaySight/contact cleanup + Yves membership draft  
