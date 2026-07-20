@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import AboutUsPage from "@/components/AboutUsPage";
 import BlogListing from "@/components/BlogListing";
+import ContentWithContactForm from "@/components/ContentWithContactForm";
 import CourtBookingCalendar from "@/components/CourtBookingCalendar";
 import InnerPageLayout from "@/components/InnerPageLayout";
 import MembershipDetailPage from "@/components/MembershipDetailPage";
@@ -29,6 +30,22 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
+function AdultProgramsPage() {
+  return <ContentWithContactForm slug="adult-programs" />;
+}
+
+function JuniorProgramsPage() {
+  return <ContentWithContactForm slug="junior-programs-2" />;
+}
+
+function LessonPackagesPage() {
+  return <ContentWithContactForm slug="junior-programs-2-copy" />;
+}
+
+function ClubAmbassadorPage() {
+  return <ContentWithContactForm slug="become-an-esc-club-ambassador" />;
+}
+
 const SPECIAL_PAGES: Record<string, React.ComponentType> = {
   blog: BlogListing,
   sponsors: SponsorsPage,
@@ -36,6 +53,10 @@ const SPECIAL_PAGES: Record<string, React.ComponentType> = {
   "membership-info": MembershipInfoPage,
   programs: ProgramsPage,
   "coaches-and-club-pros": AboutUsPage,
+  "adult-programs": AdultProgramsPage,
+  "junior-programs-2": JuniorProgramsPage,
+  "junior-programs-2-copy": LessonPackagesPage,
+  "become-an-esc-club-ambassador": ClubAmbassadorPage,
 };
 
 function formatDate(dateStr: string): string {

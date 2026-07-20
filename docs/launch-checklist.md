@@ -19,28 +19,22 @@ Source list from the club (launch / post-launch / long-term). Status reflects th
 
 ### Decide what to do about live Gravity Forms (launch blocker)
 
-**Status:** Not started — needs a decision before DNS cutover
+**Status:** Done (native Next.js forms → Resend email)
 
-The Next.js clone has page **copy** for these routes but **no working forms**. Live WordPress embeds Gravity Forms on pages linked from the main nav; cutover without a plan strands them.
+Nav-linked Gravity Forms are rebuilt as React forms that POST to `/api/contact` and email via Resend. Field sets match live GF `#87`, `#86`, and `#23`.
 
-**Working forms on live (main nav):**
+| Nav path | Page | Live GF | Clone form |
+|----------|------|---------|------------|
+| Programs → Adult Programs | `/adult-programs/` | `#87` | Contact inquiry |
+| Programs → Junior Programs | `/junior-programs-2/` | `#86` | Junior inquiry |
+| Programs → Lesson Packages | `/junior-programs-2-copy/` | `#87` | Contact inquiry |
+| About → Club Ambassador | `/become-an-esc-club-ambassador/` | `#23` | Ambassador |
 
-| Nav path | Page | Gravity Form |
-|----------|------|--------------|
-| Programs → Adult Programs | `/adult-programs/` | `#87` |
-| Programs → Junior Programs | `/junior-programs-2/` | `#86` |
-| Programs → Lesson Packages | `/junior-programs-2-copy/` | `#87` (same as adult) |
-| About → Club Ambassador | `/become-an-esc-club-ambassador/` | `#23` |
+**Ops still needed before cutover:** set `RESEND_API_KEY` on Vercel (Preview + Production), then redeploy. To/From are hardcoded in `src/lib/constants.ts` for now (`drewlefe@gmail.com` / `onboarding@resend.dev`). Switch those to the club inbox + a verified domain sender when ready. Rotate any API key that was shared in chat.
 
-**Also form-adjacent (not in live main nav):** `/subscribe-to-newsletter/` (Beaver Builder subscribe widget); `/yoga/` (GF module present but empty/broken on live).
+The ambassador form adds a required email field (and optional phone) beyond the live GF, so staff can actually reach applicants. Submissions are protected by a honeypot, an Origin check, and a per-IP rate limit; free-text fields are length-capped.
 
-**Options to decide (pick one or combine):**
-
-1. Keep a slim WordPress (or form host) on `contact.edmontonsquashclub.ca` and send form traffic there
-2. Replace with a new provider / native forms on the Next.js site
-3. Soften to mailto / external links for v1 launch
-
-Until decided: do not treat “full site clone” as including working form submit.
+**Still out of scope:** `/subscribe-to-newsletter/`, `/yoga/` (broken/empty on live).
 
 ### Page Title and Meta description fields on pages
 
@@ -104,7 +98,7 @@ Current membership pages and pricing table still reflect the migrated WP structu
 | Instagram feed on homepage | Not started | Footer links to Instagram only (`src/lib/constants.ts`) |
 | Content review | Not started | Overlaps short-term cleanup; ongoing |
 | WhatsApp signup requests | Not started | No WhatsApp CTA / form flow in the rebuild |
-| Form routing and integration | Not started | See launch item: decide WP subdomain vs new provider vs mailto |
+| Form routing and integration | Done (nav inquiries) | Native forms → Resend; newsletter/yoga still later |
 | Email signup & ESP integration | Not started | Same as mail list / newsletter page |
 
 ---
@@ -112,7 +106,7 @@ Current membership pages and pricing table still reflect the migrated WP structu
 ## Suggested order (when unblocking launch)
 
 1. DNS ownership + Vercel records for `.ca` / `.org`  
-2. **Forms decision** (Adult / Junior / Lesson Packages / Ambassador — see above)  
+2. ~~Forms decision~~ — done (native forms + Resend; set `RESEND_API_KEY` on Vercel)  
 3. Adboard embed URL from Patrick → homepage  
 4. Spot-check titles vs live; review meta descriptions on key pages (home + memberships)  
 5. After launch: Jegysoft/PlaySight/contact cleanup + Yves membership draft  

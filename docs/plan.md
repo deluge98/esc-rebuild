@@ -18,7 +18,7 @@ Clone [edmontonsquashclub.ca](https://edmontonsquashclub.ca/) as a mobile-first 
 | Non-member court booking | [CatchCorner](https://www.catchcorner.com/facility-page/embedded/rental/889) |
 | Court booking calendar | Anonymized embed (same as current site) |
 | Membership signup (for now) | ClubInterconnect / mailto — not Gravity Forms on membership pages |
-| Program / ambassador inquiry forms | **Undecided** — live uses Gravity Forms; clone has copy only (see launch checklist) |
+| Program / ambassador inquiry forms | Native React forms → Resend email (To/From in `constants.ts`; `RESEND_API_KEY` in env) |
 
 ---
 
@@ -28,7 +28,7 @@ Clone [edmontonsquashclub.ca](https://edmontonsquashclub.ca/) as a mobile-first 
 - [ ] Member login → CourtReserve
 - [ ] Court booking → CatchCorner
 - [ ] 301 redirects for any URL that changes; no broken bookmarks or SEO cliff
-- [ ] **Forms plan decided** for nav-linked Gravity Forms (`/adult-programs/`, `/junior-programs-2/`, `/junior-programs-2-copy/`, `/become-an-esc-club-ambassador/`) — keep WP subdomain, replace provider, or link/mailto for v1. Details: [launch-checklist.md](./launch-checklist.md)
+- [x] **Forms plan decided** — native forms + Resend for nav-linked GF pages (`/adult-programs/`, `/junior-programs-2/`, `/junior-programs-2-copy/`, `/become-an-esc-club-ambassador/`). Details: [launch-checklist.md](./launch-checklist.md)
 
 ---
 
@@ -87,7 +87,7 @@ Clone [edmontonsquashclub.ca](https://edmontonsquashclub.ca/) as a mobile-first 
 | Separator / spacer | Tailwind utilities | Various |
 | Video / iframe embed | `EmbedBlock` | Doubles squash, etc. |
 | Map (`fl-module-map`) | Static map image or Maps embed (club-rotated key) | Sponsor CPT pages |
-| Gravity Form (`fl-module-pp-gravity-form`) | **Not in clone yet** — decide before launch (WP subdomain / new provider / mailto) | `/adult-programs/`, `/junior-programs-2/`, `/junior-programs-2-copy/`, `/become-an-esc-club-ambassador/` (+ yoga/newsletter) |
+| Gravity Form (`fl-module-pp-gravity-form`) | **Rebuilt** as React → `/api/contact` → Resend (yoga/newsletter still out of scope) | `/adult-programs/`, `/junior-programs-2/`, `/junior-programs-2-copy/`, `/become-an-esc-club-ambassador/` |
 
 **Per-page checklist** (~25 public pages; shop/cart/checkout/my-account excluded):
 
@@ -128,4 +128,4 @@ Clone [edmontonsquashclub.ca](https://edmontonsquashclub.ca/) as a mobile-first 
 - [ ] Content cleanup (stale pages, pricing, programs)
 - [ ] CMS for club staff (Sanity / Decap)
 - [ ] Analytics (GA4)
-- [ ] Forms migration off Gravity Forms
+- [x] Forms migration off Gravity Forms (nav-linked inquiries via Resend; newsletter/yoga later)
