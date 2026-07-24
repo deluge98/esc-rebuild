@@ -68,6 +68,12 @@ Homepage (`src/app/(site)/page.tsx`) is Hero → Intro → FeatureCards → Spon
 
 ## Post-launch — short term
 
+### Remove unused static sponsor logos (after Antix sticks)
+
+**Status:** Not started
+
+Homepage + `/sponsors/` now use the Antix landscape slideshow. Once that’s confirmed for good, delete dead static sponsor assets: `src/data/sponsors.ts` and `public/images/sponsor-*` (and drop them from `npm run download-images` if listed).
+
 ### Review content; remove deprecated references (old contacts, Jegysoft, PlaySight)
 
 **Status:** Not started (known debt in migrated content)
