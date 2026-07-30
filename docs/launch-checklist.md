@@ -30,7 +30,7 @@ Nav-linked Gravity Forms are rebuilt as React forms that POST to `/api/contact` 
 | Programs → Lesson Packages | `/junior-programs-2-copy/` | `#87` | Contact inquiry |
 | About → Club Ambassador | `/become-an-esc-club-ambassador/` | `#23` | Ambassador |
 
-**Ops still needed before cutover:** set `RESEND_API_KEY` on Vercel (Preview + Production), then redeploy. To/From are hardcoded in `src/lib/constants.ts` for now (`drewlefe@gmail.com` / `onboarding@resend.dev`). Switch those to the club inbox + a verified domain sender when ready. Rotate any API key that was shared in chat.
+**Ops still needed before cutover:** set `RESEND_API_KEY` on Vercel (Preview + Production), then redeploy. From is the verified club sender (`hello@edmontonsquashclub.ca`). Recipients are in `src/lib/constants.ts` (To: Drew + `info@` + Tyler; Bcc: Jim + Jeff).
 
 The ambassador form adds a required email field (and optional phone) beyond the live GF, so staff can actually reach applicants. Submissions are protected by a honeypot, an Origin check, and a per-IP rate limit; free-text fields are length-capped.
 

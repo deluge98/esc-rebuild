@@ -60,8 +60,19 @@ describe("POST /api/contact", () => {
     assert.equal(data.ok, true);
     assert.equal(sendMock.mock.calls.length, 1);
     assert.equal(sendMock.mock.calls[0][0].replyTo, "jane@example.com");
-    assert.deepEqual(sendMock.mock.calls[0][0].to, ["drewlefe@gmail.com"]);
-    assert.equal(sendMock.mock.calls[0][0].from, "onboarding@resend.dev");
+    assert.deepEqual(sendMock.mock.calls[0][0].to, [
+      "drewlefe@gmail.com",
+      "info@edmontonsquashclub.ca",
+      "tyler@edmontonsquashclub.org",
+    ]);
+    assert.deepEqual(sendMock.mock.calls[0][0].bcc, [
+      "jimdawson@live.ca",
+      "jeff.williams@edmontonsquashclub.ca",
+    ]);
+    assert.equal(
+      sendMock.mock.calls[0][0].from,
+      "Edmonton Squash Club <hello@edmontonsquashclub.ca>",
+    );
   });
 
   test("honeypot submissions return ok without sending", async () => {

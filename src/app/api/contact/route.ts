@@ -4,7 +4,7 @@ import {
   isHoneypotTriggered,
   validateContactPayload,
 } from "@/data/contact-forms";
-import { CONTACT_FORM_FROM, CONTACT_FORM_TO } from "@/lib/constants";
+import { CONTACT_FORM_BCC, CONTACT_FORM_FROM, CONTACT_FORM_TO } from "@/lib/constants";
 
 export const runtime = "nodejs";
 
@@ -110,6 +110,7 @@ export async function POST(request: Request) {
   const { error } = await resend.emails.send({
     from: CONTACT_FORM_FROM,
     to: [...CONTACT_FORM_TO],
+    ...(CONTACT_FORM_BCC.length > 0 ? { bcc: [...CONTACT_FORM_BCC] } : {}),
     subject,
     text,
     ...(validated.data.replyTo ? { replyTo: validated.data.replyTo } : {}),

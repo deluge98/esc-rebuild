@@ -11,9 +11,18 @@ export const CLUB_ADDRESS = "15330 111 Ave NW, Edmonton, AB T5M 4C8";
 export const CLUB_MAPS_URL =
   "https://www.google.com/maps/search/?api=1&query=15330+111+Ave+NW+Edmonton+AB+T5M+4C8";
 
-/** Inquiry form mail — To/From are hardcoded for now; only RESEND_API_KEY stays in env. */
-export const CONTACT_FORM_TO = ["drewlefe@gmail.com"] as const;
-export const CONTACT_FORM_FROM = "onboarding@resend.dev";
+/** Inquiry form mail — To/From hardcoded; only RESEND_API_KEY stays in env. */
+export const CONTACT_FORM_TO = [
+  "drewlefe@gmail.com",
+  CLUB_EMAIL, // info@edmontonsquashclub.ca
+  "tyler@edmontonsquashclub.org",
+] as const;
+export const CONTACT_FORM_BCC = [
+  "jimdawson@live.ca",
+  "jeff.williams@edmontonsquashclub.ca",
+] as const;
+export const CONTACT_FORM_FROM =
+  "Edmonton Squash Club <hello@edmontonsquashclub.ca>";
 
 export const SOCIAL_LINKS = [
   {

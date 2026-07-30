@@ -36,8 +36,9 @@ Program and ambassador inquiry forms POST to `/api/contact` and send email via [
 
 **Hardcoded for now** (in [`src/lib/constants.ts`](src/lib/constants.ts)):
 
-- To: `drewlefe@gmail.com`
-- From: `onboarding@resend.dev`
+- To: `drewlefe@gmail.com`, `info@edmontonsquashclub.ca`, `tyler@edmontonsquashclub.org`
+- Bcc: `jimdawson@live.ca`, `jeff.williams@edmontonsquashclub.ca`
+- From: `Edmonton Squash Club <hello@edmontonsquashclub.ca>` (domain verified in Resend)
 
 **Secret (env only):** `RESEND_API_KEY`
 
@@ -51,7 +52,7 @@ On Vercel: Project → **Settings → Environment Variables** → add `RESEND_AP
 
 - Forms: `/adult-programs/`, `/junior-programs-2/`, `/junior-programs-2-copy/`, `/become-an-esc-club-ambassador/`.
 - The API validates input, drops bot submissions via a honeypot, rejects cross-site origins, and applies a best-effort per-IP rate limit.
-- Later: change To/From in `constants.ts` (e.g. club inbox + verified domain sender) when ready.
+- Later: none for recipients — To/Bcc are set in `constants.ts`. Ensure `RESEND_API_KEY` is on Vercel for Preview + Production.
 
 ## Stack
 
