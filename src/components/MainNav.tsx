@@ -129,9 +129,31 @@ export default function MainNav() {
                 Home
               </Link>
             </li>
-            {mainNavSections.map((section) => (
-              <NavDropdown key={section.label} section={section} pathname={pathname} />
-            ))}
+            {mainNavSections.map((section) =>
+              section.children.length === 0 && section.href ? (
+                <li key={section.label}>
+                  <Link
+                    href={section.href}
+                    aria-current={
+                      isNavActive(pathname, section.href) ? "page" : undefined
+                    }
+                    className={`block px-5 py-2.5 text-sm font-medium uppercase tracking-wide text-white ${
+                      isNavActive(pathname, section.href)
+                        ? "bg-white/15"
+                        : "hover:bg-white/10"
+                    }`}
+                  >
+                    {section.label}
+                  </Link>
+                </li>
+              ) : (
+                <NavDropdown
+                  key={section.label}
+                  section={section}
+                  pathname={pathname}
+                />
+              ),
+            )}
           </ul>
 
           <div className="py-2.5 md:hidden" aria-hidden="true">
@@ -177,47 +199,72 @@ export default function MainNav() {
                   Home
                 </Link>
               </li>
-              {mainNavSections.map((section) => (
-                <li key={section.label}>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setExpandedSection((v) => (v === section.label ? null : section.label))
-                    }
-                    className="flex w-full items-center justify-between px-4 py-3 text-left text-sm font-medium uppercase tracking-wide text-white hover:bg-white/10"
-                    aria-expanded={expandedSection === section.label}
-                  >
-                    {section.label}
-                    <svg
-                      className={`h-4 w-4 transition-transform ${
-                        expandedSection === section.label ? "rotate-180" : ""
+              {mainNavSections.map((section) =>
+                section.children.length === 0 && section.href ? (
+                  <li key={section.label}>
+                    <Link
+                      href={section.href}
+                      onClick={closeMobile}
+                      className={`block px-4 py-3 text-sm font-medium uppercase tracking-wide text-white ${
+                        isNavActive(pathname, section.href)
+                          ? "bg-white/15"
+                          : "hover:bg-white/10"
                       }`}
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
                     >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </button>
-                  {expandedSection === section.label && (
-                    <ul className="border-l-2 border-esc-red bg-black/30 py-1">
-                      {section.children.map((child) => (
-                        <li key={child.href}>
-                          <Link
-                            href={child.href}
-                            onClick={closeMobile}
-                            className={`block py-2.5 pl-6 pr-4 text-sm text-white/90 hover:bg-white/10 ${
-                              isNavActive(pathname, child.href) ? "font-semibold text-white" : ""
-                            }`}
-                          >
-                            {child.label}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </li>
-              ))}
+                      {section.label}
+                    </Link>
+                  </li>
+                ) : (
+                  <li key={section.label}>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setExpandedSection((v) =>
+                          v === section.label ? null : section.label,
+                        )
+                      }
+                      className="flex w-full items-center justify-between px-4 py-3 text-left text-sm font-medium uppercase tracking-wide text-white hover:bg-white/10"
+                      aria-expanded={expandedSection === section.label}
+                    >
+                      {section.label}
+                      <svg
+                        className={`h-4 w-4 transition-transform ${
+                          expandedSection === section.label ? "rotate-180" : ""
+                        }`}
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </button>
+                    {expandedSection === section.label && (
+                      <ul className="border-l-2 border-esc-red bg-black/30 py-1">
+                        {section.children.map((child) => (
+                          <li key={child.href}>
+                            <Link
+                              href={child.href}
+                              onClick={closeMobile}
+                              className={`block py-2.5 pl-6 pr-4 text-sm text-white/90 hover:bg-white/10 ${
+                                isNavActive(pathname, child.href)
+                                  ? "font-semibold text-white"
+                                  : ""
+                              }`}
+                            >
+                              {child.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </li>
+                ),
+              )}
             </ul>
           </div>
         </div>

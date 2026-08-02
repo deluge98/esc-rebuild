@@ -14,6 +14,66 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: "/premium-membership",
+        destination: "/membership-info/",
+        statusCode: 301,
+      },
+      {
+        source: "/premium-membership/",
+        destination: "/membership-info/",
+        statusCode: 301,
+      },
+      {
+        source: "/doubles-fitness-membership",
+        destination: "/membership-info/",
+        statusCode: 301,
+      },
+      {
+        source: "/doubles-fitness-membership/",
+        destination: "/membership-info/",
+        statusCode: 301,
+      },
+      {
+        source: "/off-peak-membership",
+        destination: "/membership-info/",
+        statusCode: 301,
+      },
+      {
+        source: "/off-peak-membership/",
+        destination: "/membership-info/",
+        statusCode: 301,
+      },
+      {
+        source: "/junior-membership",
+        destination: "/membership-info/",
+        statusCode: 301,
+      },
+      {
+        source: "/junior-membership/",
+        destination: "/membership-info/",
+        statusCode: 301,
+      },
+      {
+        source: "/basic-membership",
+        destination: "/membership-info/",
+        statusCode: 301,
+      },
+      {
+        source: "/basic-membership/",
+        destination: "/membership-info/",
+        statusCode: 301,
+      },
+      {
+        source: "/basic-legacy-membership",
+        destination: "/membership-info/",
+        statusCode: 301,
+      },
+      {
+        source: "/basic-legacy-membership/",
+        destination: "/membership-info/",
+        statusCode: 301,
+      },
+      {
         source: "/shop/:path*",
         destination: "https://edmontonsquashclub.ca/shop/",
         permanent: true,

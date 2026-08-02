@@ -1,9 +1,13 @@
 import type { MetadataRoute } from "next";
+import { isMembershipDetailSlug } from "@/data/membership-pages";
 import { getAllContentSlugs } from "@/lib/content";
 import { absoluteUrl } from "@/lib/site-url";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const slugs = getAllContentSlugs();
+  // Detail membership URLs 301 to /membership-info/ — keep them out of the sitemap.
+  const slugs = getAllContentSlugs().filter(
+    (slug) => !isMembershipDetailSlug(slug),
+  );
 
   return [
     {

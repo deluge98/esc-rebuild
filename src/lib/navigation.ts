@@ -13,13 +13,8 @@ export const mainNavSections: NavSection[] = [
   {
     label: "Memberships",
     href: "/membership-info/",
-    children: [
-      { label: "Membership Comparison", href: "/membership-info/" },
-      { label: "Premium Membership", href: "/premium-membership/" },
-      { label: "Doubles & Fitness", href: "/doubles-fitness-membership/" },
-      { label: "Off-Peak Membership", href: "/off-peak-membership/" },
-      { label: "Junior Membership", href: "/junior-membership/" },
-    ],
+    // Detail pages redirect to membership-info for now (Yves structure pending).
+    children: [],
   },
   {
     label: "About",
