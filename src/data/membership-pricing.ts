@@ -14,44 +14,43 @@ export const MEMBERSHIP_FEATURE_NAMES = [
   "Fitness Room",
   "Steam Room",
   "Doubles",
-  "Free Towels",
-  "PlaySight",
+  "Towel Service",
   "Off-Peak Singles",
   "Prime Time Singles",
-  "Ball Machine",
   "ESL Eligible",
 ] as const;
 
+/** Column order: Premium first. Junior/Student removed (student discount noted in footer). */
 export const MEMBERSHIP_TIERS: MembershipTier[] = [
   {
-    id: "junior-student",
-    name: "Junior/Student",
-    price: "$65.00 / Month",
+    id: "premium",
+    name: "Premium",
+    price: "$142.50 / Month",
     signUpUrl: MEMBERSHIP_SIGNUP_MAILTO,
-    included: [true, true, true, true, true, true, true, true, true, true],
+    included: [true, true, true, true, true, true, true, true],
   },
   {
     id: "off-peak",
     name: "Off Peak",
-    price: "$65.00 / Month",
+    price: "$75.00 / Month",
     signUpUrl: MEMBERSHIP_SIGNUP_MAILTO,
-    included: [true, true, true, true, true, true, true, false, false, false],
-  },
-  {
-    id: "premium",
-    name: "Premium",
-    price: "$130 / Month",
-    signUpUrl: MEMBERSHIP_SIGNUP_MAILTO,
-    included: [true, true, true, true, true, true, true, true, true, true],
+    included: [true, true, true, true, true, true, false, false],
   },
   {
     id: "doubles",
     name: "Doubles",
-    price: "$50.00 / Month",
+    price: "$55.00 / Month",
     signUpUrl: MEMBERSHIP_SIGNUP_MAILTO,
-    included: [true, true, true, true, true, false, false, false, false, false],
+    included: [true, true, true, true, true, false, false, false],
   },
 ];
 
-export const MEMBERSHIP_FOOTER_NOTE =
-  "All memberships require a $15.00 fee for a key fob. All doubles memberships require a $15 registration fee. Discounts are available for 1-year prepaid premium accounts (one month discount) and for students and seniors (10% for Premium & Premium ESL memberships). Drop-ins are available during staffed hours for $20.00/visit for off-peak or $25.00/visit for peak time ($12.00 for ages 25 and under or 60 and over). Guests of members can drop in for $15.00/day during off-peak hours or $20.00 during peak hours. All prices are exclusive of GST.";
+export const MEMBERSHIP_FOOTER_NOTES = [
+  "All new memberships are subject to a one-time $50.00 initiation fee that covers account creation, facility orientation, and key fob hardware and setup.",
+  "A membership discount is available for 1-year prepaid accounts.",
+  "Students enrolled in a full-time post-secondary program are eligible for a 20% discount on their membership fees.",
+  "Non-members are welcome to play during staffed hours for a fee of $20 per individual per hour. Court bookings can be made on the CourtReserve app.",
+  "Non-members are welcome to participate in ESC drop-in events for a fee of $15 per player.",
+  "Social members can access the courts at the standard guest and drop-in rates.",
+  "All prices listed are exclusive of GST.",
+] as const;

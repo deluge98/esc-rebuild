@@ -1,8 +1,9 @@
 import {
   MEMBERSHIP_FEATURE_NAMES,
-  MEMBERSHIP_FOOTER_NOTE,
+  MEMBERSHIP_FOOTER_NOTES,
   MEMBERSHIP_TIERS,
 } from "@/data/membership-pricing";
+import { MEMBERSHIP_SIGNUP_MAILTO } from "@/lib/constants";
 
 function CheckIcon() {
   return (
@@ -60,10 +61,14 @@ function featureRowClass(index: number): string {
 export default function MembershipPricingTable() {
   return (
     <div>
+      <p className="mb-6 text-center text-sm font-semibold tracking-wide text-[#1a1a1a]">
+        Prices effective September 1, 2026
+      </p>
+
       {/* Desktop comparison table */}
       <div className="membership-pricing-table hidden overflow-x-auto md:block">
-        <div className="min-w-[760px] border-4 border-[#7a93ac]">
-          <div className="grid grid-cols-5">
+        <div className="min-w-[640px] border-4 border-[#7a93ac]">
+          <div className="grid grid-cols-4">
             {/* Tier name row */}
             <div className="bg-[#fcfff7] px-2 py-5" />
             {MEMBERSHIP_TIERS.map((tier) => (
@@ -104,19 +109,14 @@ export default function MembershipPricingTable() {
                 ))}
               </div>
             ))}
-
-            {/* Sign up row */}
-            <div className="bg-[#fcfff7] px-2 py-5" />
-            {MEMBERSHIP_TIERS.map((tier) => (
-              <div key={`${tier.id}-cta`} className="bg-[#f7f7f7] px-2 py-5 text-center">
-                <SignUpLink href={tier.signUpUrl} />
-              </div>
-            ))}
           </div>
+        </div>
+        <div className="mt-6 text-center">
+          <SignUpLink href={MEMBERSHIP_SIGNUP_MAILTO} />
         </div>
       </div>
 
-      {/* Mobile stacked tiers */}
+      {/* Mobile stacked tiers — keep Sign Up per card (harder to find a single CTA on small screens) */}
       <div className="space-y-6 md:hidden">
         {MEMBERSHIP_TIERS.map((tier) => (
           <div key={tier.id} className="overflow-hidden border-4 border-[#7a93ac]">
@@ -144,7 +144,11 @@ export default function MembershipPricingTable() {
         ))}
       </div>
 
-      <p className="mt-8 text-sm leading-relaxed text-gray-700">{MEMBERSHIP_FOOTER_NOTE}</p>
+      <ul className="mt-8 list-disc space-y-2 pl-5 text-sm leading-relaxed text-gray-700">
+        {MEMBERSHIP_FOOTER_NOTES.map((note) => (
+          <li key={note}>{note}</li>
+        ))}
+      </ul>
     </div>
   );
 }
